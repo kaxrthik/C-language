@@ -35,18 +35,13 @@ int main() {
 
     srand(time(NULL));
 
-    while (base < total_frames) 
-    {
-        while (next_frame < base + window_size && next_frame < total_frames)
-        {
-            if (frame_lost(next_frame)) 
-            {
+    while (base < total_frames) {
+        while (next_frame < base + window_size && next_frame < total_frames) {
+            if (frame_lost(next_frame)) {
                 printf("Frame %d Lost. Resending from Frame %d...\n", next_frame, base);
                 next_frame = base; // Reset next_frame and resend window
                 break;
-            }
-            else 
-            {
+            } else {
                 send_frame(next_frame);
                 next_frame++;
             }
@@ -57,15 +52,12 @@ int main() {
           sleep(2);
 
           ack_received = 0;
-          for (int i = base; i < next_frame; i++) 
-          {
-              if (receive_ack(i)) 
-              {
+          for (int i = base; i < next_frame; i++) {
+              if (receive_ack(i)) {
                   printf("ACK received for Frame %d\n", i);
                   ack_received = 1;
                   base++;
-              } else 
-              {
+              } else {
                   printf("ACK lost for Frame %d. Resending from Frame %d...\n", i, base);
                   next_frame = base;
                   break;
@@ -73,6 +65,7 @@ int main() {
           }
         }
     }
+
     printf("All frames sent successfully!\n");
     return 0;
 }
