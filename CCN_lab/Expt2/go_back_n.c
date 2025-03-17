@@ -3,61 +3,76 @@
 #include <unistd.h>
 #include <time.h>
 
+#define MAX_FRAMES 100
+
 int window_size, total_frames;
 
-void send_frame(int frame) 
-{
-    printf("Sent Frame %d... \n", frame);
+// Function to simulate sending a frame
+void send_frame(int frame_number) {
+    printf("Sent Frame %d\n", frame_number);
 }
 
-int receive_ack(int frame) 
-{
-    return rand() % 2; // Simulating random ACK loss (50% probability)
+// Function to simulate receiving an acknowledgment
+int receive_ack(int frame_number) {
+    return (rand() % 10) < 7; // 70% chance of successful ACK
 }
 
-int main() 
-{
+// Function to simulate frame loss
+int frame_lost(int frame_number) {
+    return (rand() % 10) < 2; // 20% chance of frame loss
+}
+
+int main() {
     int base = 0;
     int next_frame = 0;
     int ack_received;
-    
+
     printf("Enter total frames to send: ");
     scanf("%d", &total_frames);
+
     printf("Enter window size: ");
     scanf("%d", &window_size);
 
-    srand(time(NULL)); // Seed for random ACK loss simulation
+    srand(time(NULL));
 
-    while (base < total_frames) {
-        // Sending frames in the window
-        while (next_frame < base + window_size && next_frame < total_frames) 
+    while (base < total_frames) 
+    {
+        while (next_frame < base + window_size && next_frame < total_frames)
         {
-            send_frame(next_frame);
-            next_frame++;
-        }
-
-        sleep(2); // Simulating transmission delay
-
-        ack_received = 1; // Assume all frames are acknowledged initially
-
-        // Checking acknowledgments for sent frames
-        for (int i = base; i < next_frame; i++) 
-        {
-            if (receive_ack(i)) 
+            if (frame_lost(next_frame)) 
             {
-                printf("ACK received for Frame %d\n", i);
-                base++; // Move base forward if ACK received
-            } 
+                printf("Frame %d Lost. Resending from Frame %d...\n", next_frame, base);
+                next_frame = base; // Reset next_frame and resend window
+                break;
+            }
             else 
             {
-                printf("ACK lost for Frame %d. Resending from Frame %d...\n", i, base);
-                next_frame = base; // Reset next_frame to resend unacknowledged frames
-                ack_received = 0; // Mark that not all frames were acknowledged
-                break; // Stop and resend lost frames
+                send_frame(next_frame);
+                next_frame++;
             }
         }
-    }
 
+        if(next_frame > base) // only wait for ack if frames were sent.
+        {
+          sleep(2);
+
+          ack_received = 0;
+          for (int i = base; i < next_frame; i++) 
+          {
+              if (receive_ack(i)) 
+              {
+                  printf("ACK received for Frame %d\n", i);
+                  ack_received = 1;
+                  base++;
+              } else 
+              {
+                  printf("ACK lost for Frame %d. Resending from Frame %d...\n", i, base);
+                  next_frame = base;
+                  break;
+              }
+          }
+        }
+    }
     printf("All frames sent successfully!\n");
     return 0;
 }
