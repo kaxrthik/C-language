@@ -28,38 +28,43 @@ int main()
     srand(time(NULL));
 
     int Frame = 0;
-    while(Frame < total_frames)
+    while (Frame < total_frames)
     {
         send_frame(Frame);
         int outcome = simulate_outcome(); // Decide what happens AFTER sending
         int ack = 0, wait_time = 0;
 
-        if (outcome == 2) // Frame lost
+        while (wait_time < timeout)
         {
-            printf("Frame %d was lost during transmission.\n", Frame);
-        }
-        else
-        {
-            while (wait_time < timeout)
-            {
-                sleep(1);
-                wait_time++;
+            sleep(1);
+            wait_time++;
 
-                if (outcome == 1) // ACK lost
+            if (outcome == 2) // Frame lost
+            {
+                if (wait_time == timeout)
                 {
-                    printf("Waiting for ACK on frame %d... \n", Frame);
-                    if (wait_time == rtt)
-                    {
-                        printf("ACK lost for Frame %d.\n", Frame);
-                        break;
-                    }
-                }
-                else if (outcome == 0) // Successful ACK
-                {
-                    printf("ACK received for frame %d \n", Frame);
-                    ack = 1;
+                    printf("Frame %d was lost.\n", Frame);
                     break;
                 }
+                else
+                {
+                    printf("Waiting for ACK on frame %d...\n", Frame);
+                }
+            }
+            else if (outcome == 1) // ACK lost
+            {
+                printf("Waiting for ACK on frame %d...\n", Frame);
+                if (wait_time == rtt)
+                {
+                    printf("ACK lost for Frame %d.\n", Frame);
+                    break;
+                }
+            }
+            else if (outcome == 0) // Successful ACK
+            {
+                printf("ACK received for frame %d \n", Frame);
+                ack = 1;
+                break;
             }
         }
 
