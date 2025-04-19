@@ -1,3 +1,4 @@
+//CYCLIC REDUNDANCY CHECK
 #include <stdio.h>
 #include <string.h>
 

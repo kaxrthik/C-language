@@ -1,3 +1,4 @@
+//HAMMING CODE
 #include <stdio.h>
 
 int main() {
