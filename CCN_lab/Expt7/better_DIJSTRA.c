@@ -1,7 +1,6 @@
 #include <stdio.h>
 #define INT_MAX 99
 #define MAX_VERTICES 100
-
 int minDistance(int dist[], int sptSet[], int vertices) // Function to find the vertex with the minimum distance value
 {
     int min = INT_MAX, minIndex;
@@ -23,7 +22,6 @@ void printSolution(int dist[], int vertices) // Function to print the constructe
         printf(" %d \t %d\n", i, dist[i]);
     }
 }
-
 void dijkstra(int graph[MAX_VERTICES][MAX_VERTICES], int src, int vertices) // Function to implement Dijkstra's algorithm for a given graph and source vertex
 {
     int dist[MAX_VERTICES];   // The output array dist[i] holds the shortest distance from src to i
@@ -51,7 +49,6 @@ void dijkstra(int graph[MAX_VERTICES][MAX_VERTICES], int src, int vertices) // F
     }
     printSolution(dist, vertices); // Print the constructed distance array
 }
-
 int main()
 {
     int vertices, check;
@@ -76,7 +73,6 @@ int main()
         int source;
         printf("Input the source vertex: "); // Input the source vertex
         scanf("%d", &source);
-
         if (source < 0 || source >= vertices)
         {
             printf("Invalid source vertex. Exiting...\n");
@@ -86,9 +82,7 @@ int main()
         printf("check for other source: 1 for YES | 0 for NO : ");
         scanf("%d", &check);
         if (check == 0)
-        {
             break;
-        }
     }
     return 0;
 }
