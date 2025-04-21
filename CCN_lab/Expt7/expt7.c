@@ -42,7 +42,7 @@ void dvr()
     {
         printf("\n\nState value for router %d is \n", i + 1);
         for (j = 0; j < n; j++)
-            printf("\t\nnode %d via %d Distance%d", j + 1, temp[i][j] + 1, dist[i][j]);
+            printf("\t\nnode %d via %d Distance %d", j + 1, temp[i][j] + 1, dist[i][j]);
     }
     printf("\n\n");
 }
