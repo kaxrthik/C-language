@@ -1,21 +1,18 @@
-//NEW CODE FOR STOP AND WAIT PROTOCOL
-#include<stdio.h>
-#include<stdlib.h>
-#include<unistd.h>
-#include<time.h>
-
+// NEW CODE FOR STOP AND WAIT PROTOCOL
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <time.h>
 void send_frame(int frame_num)
 {
     printf("\nTransmitted Frame %d... \n", frame_num);
 }
-
 // Simulate transmission outcome
 // 0 = Success, 1 = ACK lost, 2 = Frame lost
 int simulate_outcome()
 {
     return rand() % 3;
 }
-
 int main()
 {
     int total_frames, timeout, rtt;
@@ -25,21 +22,17 @@ int main()
     scanf("%d", &rtt);
     printf("Enter time out duration (in seconds): ");
     scanf("%d", &timeout);
-
     srand(time(NULL));
-
     int Frame = 0;
     while (Frame < total_frames)
     {
         send_frame(Frame);
         int outcome = simulate_outcome(); // Decide what happens AFTER sending
         int ack = 0, wait_time = 0;
-
         while (wait_time < timeout)
         {
             sleep(1);
             wait_time++;
-
             if (outcome == 2) // Frame lost
             {
                 if (wait_time == timeout)
@@ -68,7 +61,6 @@ int main()
                 break;
             }
         }
-
         if (!ack)
         {
             printf("Timeout! Retransmit Frame %d...\n", Frame);
@@ -78,7 +70,6 @@ int main()
             Frame++;
         }
     }
-
     printf("All frames transmitted successfully.\n");
     return 0;
 }
