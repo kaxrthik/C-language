@@ -21,16 +21,16 @@ int main() {
     h[3] = (d[1] + d[2] + d[3]) % 2;  // P4
 
     // Print generated Hamming code
-    printf("Generated 7-bit Hamming code: ");
+    printf("Generated 7-bit Hamming code:");
     for (int i = 0; i < 7; i++) {
-        printf("%d", h[i]);
+        printf(" %d", h[i]);
     }
     printf("\n");
 
     // Input received 7-bit codeword
-    printf("Enter received 7-bit codeword: ");
+    printf("Enter received 7-bit codeword:");
     for (int i = 0; i < 7; i++) {
-        scanf("%d", &received[i]);
+        scanf(" %d", &received[i]);
     }
 
     // Check parity bits
@@ -48,7 +48,7 @@ int main() {
         received[error_pos - 1] ^= 1;  // Correct the error
         printf("Corrected codeword: ");
         for (int i = 0; i < 7; i++) {
-            printf("%d", received[i]);  // Fixed the printing of the values
+            printf(" %d", received[i]);  // Fixed the printing of the values
         }
         printf("\n");
     }

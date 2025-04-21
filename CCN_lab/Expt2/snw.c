@@ -1,4 +1,4 @@
-//New code
+//NEW CODE FOR STOP AND WAIT PROTOCOL
 #include<stdio.h>
 #include<stdlib.h>
 #include<unistd.h>
@@ -6,7 +6,7 @@
 
 void send_frame(int frame_num)
 {
-    printf("Transmitted Frame %d... \n", frame_num);
+    printf("\nTransmitted Frame %d... \n", frame_num);
 }
 
 // Simulate transmission outcome
@@ -71,7 +71,7 @@ int main()
 
         if (!ack)
         {
-            printf("Timeout! Retransmitting Frame %d...\n", Frame);
+            printf("Timeout! Retransmit Frame %d...\n", Frame);
         }
         else
         {
