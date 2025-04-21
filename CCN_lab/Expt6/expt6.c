@@ -10,24 +10,29 @@ void dijkstra(int start);
 
 void printPath(int src, int dest);
 
-int main() {
+int main() 
+{
     int i, j;
 
     printf("Enter number of nodes: ");
     scanf("%d", &n);
 
     printf("Enter the cost matrix (9999 for no direct path):\n");
-    for(i = 0; i < n; i++) {
-        for(j = 0; j < n; j++) {
+    for(i = 0; i < n; i++) 
+    {
+        for(j = 0; j < n; j++) 
+        {
             scanf("%d", &cost[i][j]);
             if(i == j)
                 cost[i][j] = 0;
         }
     }
 
-    for(i = 0; i < n; i++) {
+    for(i = 0; i < n; i++) 
+    {
         dijkstra(i);
-        for(j = 0; j < n; j++) {
+        for(j = 0; j < n; j++) 
+        {
             distanceMatrix[i][j] = dist[j];
             pathMatrix[i][j] = pred[j];
         }
