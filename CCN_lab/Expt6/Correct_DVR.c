@@ -32,12 +32,9 @@ void dvr()
                     }
     for (i = 0; i < n; i++)
     {
-        printf("Node %d: \n",i+1);
+        printf("Node %d : ",i+1);
         for (j = 0; j < n; j++)
-        {
-            printf("%d\n", dist[i][j]);
-        }
+            printf("%d ", dist[i][j]);
         printf("\n");
     }
-    return 0;
 }
