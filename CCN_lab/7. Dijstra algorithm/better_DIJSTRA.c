@@ -18,9 +18,7 @@ void printSolution(int dist[], int vertices) // Function to print the constructe
 {
     printf("Vertex \tDistance from Source\n");
     for (int i = 0; i < vertices; i++)
-    {
         printf(" %d \t %d\n", i, dist[i]);
-    }
 }
 void dijkstra(int graph[MAX_VERTICES][MAX_VERTICES], int src, int vertices) // Function to implement Dijkstra's algorithm for a given graph and source vertex
 {
@@ -42,9 +40,7 @@ void dijkstra(int graph[MAX_VERTICES][MAX_VERTICES], int src, int vertices) // F
             // Update dist[v] only if it is not in the sptSet, there is an edge from u to v,
             // and the total weight of path from src to v through u is smaller than the current value of dist[v]
             if (!sptSet[v] && graph[u][v] && dist[u] != INT_MAX && dist[u] + graph[u][v] < dist[v])
-            {
                 dist[v] = dist[u] + graph[u][v];
-            }
         }
     }
     printSolution(dist, vertices); // Print the constructed distance array
@@ -64,9 +60,7 @@ int main()
     for (int i = 0; i < vertices; i++)
     {
         for (int j = 0; j < vertices; j++)
-        {
             scanf("%d", &graph[i][j]);
-        }
     }
     while (check)
     {
