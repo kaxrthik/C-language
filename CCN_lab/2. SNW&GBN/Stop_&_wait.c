@@ -7,9 +7,7 @@ void send_frame(int frame_num)
 {
     printf("\nTransmitted Frame %d... \n", frame_num);
 }
-// Simulate transmission outcome
-// 0 = Success, 1 = ACK lost, 2 = Frame lost
-int simulate_outcome()
+int simulate_outcome() // Simulate transmission outcome // 0 = Success, 1 = ACK lost, 2 = Frame lost
 {
     return rand() % 3;
 }

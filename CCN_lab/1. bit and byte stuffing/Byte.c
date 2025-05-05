@@ -4,8 +4,8 @@ int main()
 {
     int i ,j = 0;
     char frame[100], stuffframe[200]="\0";
-    char beginningFlag[] = "dlestx ";
-    char endFlag[] = " dleetx";
+    char beginningFlag[] = "dlestx";
+    char endFlag[] = "dleetx";
     printf("Enter frame: "); // Prompt the user to enter a frame
     scanf("%s", frame);
     strcpy(stuffframe, beginningFlag); // Start the stuffed frame with the starting flag
